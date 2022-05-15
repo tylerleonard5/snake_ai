@@ -13,8 +13,8 @@ ipython.magic("matplotlib qt")
 
 
 MAX_MEMORY = 100_000
-BATCH_SIZE = 1000
-LR = 0.001
+BATCH_SIZE = 528
+LR = 0.002
 
 class Agent:
 
@@ -23,7 +23,7 @@ class Agent:
         self.epsilon = 0  # randomness
         self.gamma = 0.9  # Discount rate
         self.memory = deque(maxlen = MAX_MEMORY)
-        self.model = Linear_QNet(11, 256, 3)
+        self.model = Linear_QNet(12, 256, 3)
         self.trainer = QTrainer(model = self.model, lr = LR, gamma = self.gamma)
         # model, trainer
 
@@ -57,6 +57,11 @@ class Agent:
             (dir_l and game.is_collision(point_d)) or
             (dir_u and game.is_collision(point_l)) or
             (dir_d and game.is_collision(point_r)),
+            #danger down
+            (dir_r and game.is_collision(point_l)) or
+            (dir_l and game.is_collision(point_r)) or
+            (dir_u and game.is_collision(point_d)) or
+            (dir_d and game.is_collision(point_u)),
 
             # Move direction
             dir_l,

@@ -80,10 +80,12 @@ class SnakeGameAI:
                 pygame.quit()
                 quit()
             
-        
+        distance0 = ((self.food.x - self.head.x)**2 + (self.food.y - self.head.y)**2)**0.5
         # 2. move
         self._move(action) # update the head
         self.snake.insert(0, self.head)
+
+        distance = ((self.food.x - self.head.x)**2 + (self.food.y - self.head.y)**2)**0.5
         
         # 3. check if game over
         reward = 0
@@ -99,6 +101,10 @@ class SnakeGameAI:
             self.score += 1
             self._place_food()
         else:
+            if distance - distance0 < 0:
+                reward = 1
+            else:
+                reward = -1
             self.snake.pop()
         
         # 5. update ui and clock
@@ -118,6 +124,9 @@ class SnakeGameAI:
             return True
         
         return False
+
+
+
         
     def _update_ui(self):
         self.display.fill(BLACK)
