@@ -6,13 +6,15 @@ from game import SnakeGameAI, Direction, Point
 from model import Linear_QNet, QTrainer
 from helper import plot
 
+#Test
+
 from IPython import get_ipython
 ipython = get_ipython()
 ipython.magic("matplotlib qt")
 
 
 
-MAX_MEMORY = 100_000
+MAX_MEMORY = 100000
 BATCH_SIZE = 528
 LR = 0.002
 
